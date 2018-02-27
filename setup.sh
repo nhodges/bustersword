@@ -10,3 +10,7 @@ cd; curl -#L https://github.com/barryclark/bashstrap/tarball/master | tar -xzv -
 brew install nvm
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
 echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.bashrc
+
+source ~/.bashrc
+
+brew install yarn
