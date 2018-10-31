@@ -12,5 +12,3 @@ echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
 echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.bashrc
 
 source ~/.bashrc
-
-brew install yarn
