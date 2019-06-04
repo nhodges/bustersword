@@ -5,6 +5,9 @@ COLOR_OCHRE="\033[38;5;95m"
 COLOR_BLUE="\033[0;34m"
 COLOR_WHITE="\033[0;37m"
 COLOR_RESET="\033[0m"
+TEXT_BOLD=$(tput bold)
+TEXT_UNDERLINE=$(tput smul)
+TEXT_RESET=$(tput sgr0)
 
 function git_color {
   local git_status="$(git status 2> /dev/null)"
@@ -34,8 +37,25 @@ function git_branch {
   fi
 }
 
-PS1="\[$COLOR_WHITE\]\u@\w"                 # basename of pwd
-PS1+="\[\$(git_color)\]"                    # colors git status
-PS1+="\$(git_branch)"                       # prints current branch
-PS1+="\[$COLOR_BLUE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
+PS1="\[$COLOR_WHITE\]\u ${TEXT_BOLD}@${TEXT_RESET} \w"          # basename of pwd
+#PS1+="\[\$(git_color)\]"        # colors git status
+PS1+="\$(git_branch)"           # prints current branch
+PS1+="\[$COLOR_BLUE\] \$\[$COLOR_RESET\] "   # '#' for root, else '$'
 export PS1
+
+# Universal Bash History
+# https://askubuntu.com/a/115625
+# https://unix.stackexchange.com/a/48113
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend # append to history, don't overwrite it
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Re-source Bash Configuration
+MSG_REBASH="$COLOR_YELLOW"
+MSG_REBASH+="Re-sourcing Bash configuration files ..."
+MSG_REBASH+="$COLOR_RESET"
+#function rebash {
+#  echo $MSG_REBASH
+#  source ~/.bash_profile
+#}
+alias rebash='echo -e $MSG_REBASH; source ~/.bash_profile'
