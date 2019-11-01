@@ -13,4 +13,5 @@ echo '. "/usr/local/opt/nvm/nvm.sh"' >> ~/.bashrc
 
 source ~/.bashrc
 
+# Install: Yarn Package Manager
 brew install yarn
